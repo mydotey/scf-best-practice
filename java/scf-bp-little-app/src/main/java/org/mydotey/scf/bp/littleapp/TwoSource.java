@@ -13,13 +13,12 @@ import org.mydotey.scf.facade.ConfigurationManagers;
 import org.mydotey.scf.facade.StringProperties;
 import org.mydotey.scf.facade.StringPropertySources;
 import org.mydotey.scf.source.stringproperty.propertiesfile.PropertiesFileConfigurationSourceConfig;
-import org.mydotey.scf.type.string.StringConverter;
-import org.mydotey.scf.type.string.StringToIntConverter;
-import org.mydotey.scf.type.string.StringToMapConverter;
+import org.mydotey.scf.source.stringproperty.systemproperties.SystemPropertiesConfigurationSource;
 
-public class OneSourceApp {
+public class TwoSource {
 
     private static StringProperties _properties;
+    private static SystemPropertiesConfigurationSource _systemPropertiesSource;
 
     private static Property<String, String> _appId;
     private static Property<String, String> _appName;
@@ -32,9 +31,19 @@ public class OneSourceApp {
         PropertiesFileConfigurationSourceConfig sourceConfig = StringPropertySources
                 .newPropertiesFileSourceConfigBuilder().setName("app").setFileName("app.properties").build();
         ConfigurationSource source = StringPropertySources.newPropertiesFileSource(sourceConfig);
+        _systemPropertiesSource = StringPropertySources.newSystemPropertiesSource("system-property");
+
+        // add 2 source, system property has higher priority then app.properties
         ConfigurationManagerConfig managerConfig = ConfigurationManagers.newConfigBuilder().setName("little-app")
-                .addSource(1, source).build();
+                .addSource(1, source).addSource(2, _systemPropertiesSource).build();
         ConfigurationManager manager = ConfigurationManagers.newManager(managerConfig);
+
+        // add a log listener
+        manager.addChangeListener(
+                e -> System.out.printf("\nproperty %s changed, old value: %s, new value: %s, changeTime: %s\n",
+                        e.getProperty(), e.getOldValue(), e.getNewValue(), e.getChangeTime()));
+
+        // construct a StringProperties facade tool
         _properties = new StringProperties(manager);
 
         // default to null
@@ -42,6 +51,8 @@ public class OneSourceApp {
 
         // default to "unknown"
         _appName = _properties.getStringProperty("app.name", "unknown");
+        // add change listener to app.name
+        _appName.addChangeListener(e -> System.out.println("\napp.name changed, maybe we need do something"));
 
         // default to empty list
         _userList = _properties.getListProperty("user.list", new ArrayList<>());
@@ -65,6 +76,11 @@ public class OneSourceApp {
         System.out.println("UserData: " + _userData.getValue());
         System.out.println("SleepTime: " + _sleepTime.getValue());
 
+        // get some property value for non-stable property (the key is not stable, not sure it exists or not)
+        String somePropertyValue = _properties.getStringPropertyValue("some.data", "not-sure");
+        System.out.println();
+        System.out.println("some.data: " + somePropertyValue);
+
         System.out.println();
 
         System.out.printf("Now sleep %d ms ...\n", _sleepTime.getValue());
@@ -77,75 +93,12 @@ public class OneSourceApp {
         for (int i = 0; i < _myCustomData.getValue().getTimes(); i++)
             System.out.printf("%s %s!\n", _myCustomData.getValue().getSay(), _myCustomData.getValue().getName());
 
+        // change the system property, configuration manager will auto update it
+        // the change listener will be auto-called as well
+        _systemPropertiesSource.setProperty("app.name", "new-little-app");
+
         System.out.println();
         System.out.println("Bye!");
-    }
-
-    private static class MyCustomType {
-
-        public static final StringConverter<MyCustomType> CONVERTER = new StringConverter<MyCustomType>(
-                MyCustomType.class) {
-            @Override
-            public MyCustomType convert(String source) {
-                Map<String, String> fieldValueMap = StringToMapConverter.DEFAULT.convert(source);
-                return new MyCustomType(fieldValueMap.get("name"), fieldValueMap.get("say"),
-                        StringToIntConverter.DEFAULT.convert(fieldValueMap.get("times")));
-            }
-        };
-
-        private String name;
-        private String say;
-        private int times;
-
-        public MyCustomType(String name, String say, int times) {
-            super();
-            this.name = name;
-            this.say = say;
-            this.times = times;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getSay() {
-            return say;
-        }
-
-        public int getTimes() {
-            return times;
-        }
-
-        // for custom type, must override the equals method, so as to know whether a value changed
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj)
-                return true;
-            if (obj == null)
-                return false;
-            if (getClass() != obj.getClass())
-                return false;
-            MyCustomType other = (MyCustomType) obj;
-            if (name == null) {
-                if (other.name != null)
-                    return false;
-            } else if (!name.equals(other.name))
-                return false;
-            if (say == null) {
-                if (other.say != null)
-                    return false;
-            } else if (!say.equals(other.say))
-                return false;
-            if (times != other.times)
-                return false;
-            return true;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("%s { name: %s, say: %s, times: %d }", getClass().getSimpleName(), name, say, times);
-        }
-
     }
 
 }
