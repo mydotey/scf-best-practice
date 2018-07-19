@@ -116,6 +116,31 @@ public class OneSourceApp {
             return times;
         }
 
+        // for custom type, must override the equals method, so as to know whether a value changed
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            MyCustomType other = (MyCustomType) obj;
+            if (name == null) {
+                if (other.name != null)
+                    return false;
+            } else if (!name.equals(other.name))
+                return false;
+            if (say == null) {
+                if (other.say != null)
+                    return false;
+            } else if (!say.equals(other.say))
+                return false;
+            if (times != other.times)
+                return false;
+            return true;
+        }
+
         @Override
         public String toString() {
             return String.format("%s { name: %s, say: %s, times: %d }", getClass().getSimpleName(), name, say, times);

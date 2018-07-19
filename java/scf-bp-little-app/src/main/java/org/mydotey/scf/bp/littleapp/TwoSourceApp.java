@@ -41,6 +41,11 @@ public class TwoSourceApp {
                 .addSource(1, source).addSource(2, _systemPropertiesSource).build();
         ConfigurationManager manager = ConfigurationManagers.newManager(managerConfig);
 
+        // add a log listener
+        manager.addChangeListener(
+                e -> System.out.printf("\nproperty %s changed, old value: %s, new value: %s, changeTime: %s\n",
+                        e.getProperty(), e.getOldValue(), e.getNewValue(), e.getChangeTime()));
+
         // construct a StringProperties facade tool
         _properties = new StringProperties(manager);
 
@@ -50,8 +55,7 @@ public class TwoSourceApp {
         // default to "unknown"
         _appName = _properties.getStringProperty("app.name", "unknown");
         // add change listener to app.name
-        _appName.addChangeListener(
-                p -> System.out.printf("\nproperty %s changed, new value: %s\n", p.getConfig().getKey(), p.getValue()));
+        _appName.addChangeListener(e -> System.out.println("\napp.name changed, maybe we need do something"));
 
         // default to empty list
         _userList = _properties.getListProperty("user.list", new ArrayList<>());
@@ -128,6 +132,31 @@ public class TwoSourceApp {
 
         public int getTimes() {
             return times;
+        }
+
+        // for custom type, must override the equals method, so as to know whether a value changed
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            MyCustomType other = (MyCustomType) obj;
+            if (name == null) {
+                if (other.name != null)
+                    return false;
+            } else if (!name.equals(other.name))
+                return false;
+            if (say == null) {
+                if (other.say != null)
+                    return false;
+            } else if (!say.equals(other.say))
+                return false;
+            if (times != other.times)
+                return false;
+            return true;
         }
 
         @Override
