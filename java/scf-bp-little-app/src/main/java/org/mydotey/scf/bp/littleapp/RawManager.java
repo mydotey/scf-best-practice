@@ -34,9 +34,12 @@ public class RawManager {
     private static Property<String, MyCustomType> _myCustomData;
 
     private static void initConfig() {
+        // crate a non-dynamic K/V (String/String) configuration source
         PropertiesFileConfigurationSourceConfig sourceConfig = StringPropertySources
                 .newPropertiesFileSourceConfigBuilder().setName("app").setFileName("app.properties").build();
         ConfigurationSource source = StringPropertySources.newPropertiesFileSource(sourceConfig);
+
+        // create a configuration manager with single source
         ConfigurationManagerConfig managerConfig = ConfigurationManagers.newConfigBuilder().setName("little-app")
                 .addSource(1, source).build();
         _manager = ConfigurationManagers.newManager(managerConfig);
@@ -82,11 +85,11 @@ public class RawManager {
         initConfig();
 
         // show properties
-        System.out.println("AppId: " + _appId.getValue());
-        System.out.println("AppName: " + _appName.getValue());
-        System.out.println("UserList: " + _userList.getValue());
-        System.out.println("UserData: " + _userData.getValue());
-        System.out.println("SleepTime: " + _sleepTime.getValue());
+        System.out.println("app.id: " + _appId.getValue());
+        System.out.println("app.name: " + _appName.getValue());
+        System.out.println("user.list: " + _userList.getValue());
+        System.out.println("user.data: " + _userData.getValue());
+        System.out.println("sleep.time: " + _sleepTime.getValue());
 
         // get some property value for non-stable property (the key is not stable, not sure it exists or not)
         PropertyConfig<String, String> propertyConfig = ConfigurationProperties.<String, String> newConfigBuilder()

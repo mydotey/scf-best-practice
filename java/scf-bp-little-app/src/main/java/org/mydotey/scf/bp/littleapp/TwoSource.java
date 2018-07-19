@@ -28,12 +28,15 @@ public class TwoSource {
     private static Property<String, MyCustomType> _myCustomData;
 
     private static void initConfig() {
+        // crate a non-dynamic K/V (String/String) configuration source
         PropertiesFileConfigurationSourceConfig sourceConfig = StringPropertySources
                 .newPropertiesFileSourceConfigBuilder().setName("app").setFileName("app.properties").build();
         ConfigurationSource source = StringPropertySources.newPropertiesFileSource(sourceConfig);
+
+        // crate a dynamic K/V (String/String) configuration source
         _systemPropertiesSource = StringPropertySources.newSystemPropertiesSource("system-property");
 
-        // add 2 source, system property has higher priority then app.properties
+        // create a configuration manager with 2 sources, system property has higher priority then app.properties
         ConfigurationManagerConfig managerConfig = ConfigurationManagers.newConfigBuilder().setName("little-app")
                 .addSource(1, source).addSource(2, _systemPropertiesSource).build();
         ConfigurationManager manager = ConfigurationManagers.newManager(managerConfig);
@@ -43,7 +46,7 @@ public class TwoSource {
                 e -> System.out.printf("\nproperty %s changed, old value: %s, new value: %s, changeTime: %s\n",
                         e.getProperty(), e.getOldValue(), e.getNewValue(), e.getChangeTime()));
 
-        // construct a StringProperties facade tool
+        // create a StringProperties facade tool
         _properties = new StringProperties(manager);
 
         // default to null
@@ -70,11 +73,12 @@ public class TwoSource {
     public static void main(String[] args) throws InterruptedException {
         initConfig();
 
-        System.out.println("AppId: " + _appId.getValue());
-        System.out.println("AppName: " + _appName.getValue());
-        System.out.println("UserList: " + _userList.getValue());
-        System.out.println("UserData: " + _userData.getValue());
-        System.out.println("SleepTime: " + _sleepTime.getValue());
+        // show properties
+        System.out.println("app.id: " + _appId.getValue());
+        System.out.println("app.name: " + _appName.getValue());
+        System.out.println("user.list: " + _userList.getValue());
+        System.out.println("user.data: " + _userData.getValue());
+        System.out.println("sleep.time: " + _sleepTime.getValue());
 
         // get some property value for non-stable property (the key is not stable, not sure it exists or not)
         String somePropertyValue = _properties.getStringPropertyValue("some.data", "not-sure");
@@ -93,6 +97,7 @@ public class TwoSource {
         for (int i = 0; i < _myCustomData.getValue().getTimes(); i++)
             System.out.printf("%s %s!\n", _myCustomData.getValue().getSay(), _myCustomData.getValue().getName());
 
+        // system source has higher priority than app.properties,
         // change the system property, configuration manager will auto update it
         // the change listener will be auto-called as well
         _systemPropertiesSource.setProperty("app.name", "new-little-app");
