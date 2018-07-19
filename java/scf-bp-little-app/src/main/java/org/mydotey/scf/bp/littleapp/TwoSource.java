@@ -28,7 +28,7 @@ public class TwoSource {
     private static Property<String, MyCustomType> _myCustomData;
 
     private static void initConfig() {
-        // crate a non-dynamic K/V (String/String) configuration source
+        // create a non-dynamic K/V (String/String) configuration source
         PropertiesFileConfigurationSourceConfig sourceConfig = StringPropertySources
                 .newPropertiesFileSourceConfigBuilder().setName("app").setFileName("app.properties").build();
         ConfigurationSource source = StringPropertySources.newPropertiesFileSource(sourceConfig);
