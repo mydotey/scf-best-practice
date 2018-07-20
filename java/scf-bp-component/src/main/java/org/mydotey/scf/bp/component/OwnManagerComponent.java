@@ -37,14 +37,14 @@ public class OwnManagerComponent {
         // create a non-dynamic K/V (String/String) configuration source
         PropertiesFileConfigurationSourceConfig sourceConfig = StringPropertySources
                 .newPropertiesFileSourceConfigBuilder().setName("properties-file")
-                .setFileName("my-component.properties").build();
+                .setFileName("own-component.properties").build();
         ConfigurationSource source1 = StringPropertySources.newPropertiesFileSource(sourceConfig);
 
         // create other dynamic or non-dynamic sources
         // ...
 
         // create a configuration manager with single source
-        ConfigurationManagerConfig managerConfig = ConfigurationManagers.newConfigBuilder().setName("my-component")
+        ConfigurationManagerConfig managerConfig = ConfigurationManagers.newConfigBuilder().setName("own-component")
                 .addSource(1, source1)
                 // add other sources
                 .build();
@@ -55,7 +55,7 @@ public class OwnManagerComponent {
     }
 
     public void yourComponentApi() {
-
+        System.out.println("OwnManagerComponent is doing something");
     }
 
 }

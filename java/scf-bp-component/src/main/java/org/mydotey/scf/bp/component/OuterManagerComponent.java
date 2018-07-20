@@ -34,7 +34,7 @@ public class OuterManagerComponent {
     }
 
     public void yourComponentApi() {
-
+        System.out.println("OuterManagerComponent is doing something");
     }
 
 }

@@ -28,7 +28,8 @@ public class OneSource {
     private static void initConfig() {
         // create a non-dynamic K/V (String/String) configuration source
         PropertiesFileConfigurationSourceConfig sourceConfig = StringPropertySources
-                .newPropertiesFileSourceConfigBuilder().setName("app").setFileName("app.properties").build();
+                .newPropertiesFileSourceConfigBuilder().setName("app-properties-file").setFileName("app.properties")
+                .build();
         ConfigurationSource source = StringPropertySources.newPropertiesFileSource(sourceConfig);
 
         // create a configuration manager with single source
