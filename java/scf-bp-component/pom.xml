@@ -29,6 +29,10 @@
             <artifactId>scf-simple</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.mydotey.scf.yaml</groupId>
+            <artifactId>scf-yaml</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <scope>test</scope>
