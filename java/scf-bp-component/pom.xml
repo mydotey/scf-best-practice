@@ -33,6 +33,10 @@
             <artifactId>scf-yaml</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.mydotey.scf.labeled</groupId>
+            <artifactId>scf-labeled</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <scope>test</scope>

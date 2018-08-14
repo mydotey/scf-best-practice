@@ -43,8 +43,9 @@
         <java.version>1.8</java.version>
         <source.encoding>UTF-8</source.encoding>
         <slf4j.version>1.7.21</slf4j.version>
-        <scf.version>1.2.1</scf.version>
-        <scf-yaml.version>1.0.1</scf-yaml.version>
+        <scf.version>1.3.0</scf.version>
+        <scf-yaml.version>1.0.2</scf-yaml.version>
+        <scf-labeled.version>1.0.0</scf-labeled.version>
         <guava.version>19.0</guava.version>
         <junit.version>4.12</junit.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
@@ -82,11 +83,6 @@
             </dependency>
             <dependency>
                 <groupId>org.mydotey.scf</groupId>
-                <artifactId>scf-labeled</artifactId>
-                <version>${scf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mydotey.scf</groupId>
                 <artifactId>scf-simple</artifactId>
                 <version>${scf.version}</version>
             </dependency>
@@ -94,6 +90,11 @@
                 <groupId>org.mydotey.scf.yaml</groupId>
                 <artifactId>scf-yaml</artifactId>
                 <version>${scf-yaml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mydotey.scf.labeled</groupId>
+                <artifactId>scf-labeled</artifactId>
+                <version>${scf-labeled.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
