@@ -47,6 +47,16 @@ public class MyCustomType {
         return times;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((say == null) ? 0 : say.hashCode());
+        result = prime * result + times;
+        return result;
+    }
+
     // for custom type, must override the equals method, so as to know whether a value changed
     @Override
     public boolean equals(Object obj) {
