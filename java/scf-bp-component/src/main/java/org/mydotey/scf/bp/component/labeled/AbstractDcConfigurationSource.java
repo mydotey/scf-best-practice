@@ -12,7 +12,8 @@ import org.mydotey.scf.labeled.PropertyLabel;
  *
  * May 17, 2018
  */
-public abstract class AbstractDcConfigurationSource extends AbstractLabeledConfigurationSource {
+public abstract class AbstractDcConfigurationSource
+        extends AbstractLabeledConfigurationSource<ConfigurationSourceConfig> {
 
     public AbstractDcConfigurationSource(ConfigurationSourceConfig config) {
         super(config);

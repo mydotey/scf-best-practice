@@ -29,11 +29,11 @@
             <artifactId>scf-simple</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mydotey.scf.yaml</groupId>
+            <groupId>org.mydotey.scf</groupId>
             <artifactId>scf-yaml</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mydotey.scf.labeled</groupId>
+            <groupId>org.mydotey.scf</groupId>
             <artifactId>scf-labeled</artifactId>
         </dependency>
         <dependency>
