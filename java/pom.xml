@@ -43,10 +43,7 @@
         <java.version>1.8</java.version>
         <source.encoding>UTF-8</source.encoding>
         <slf4j.version>1.7.21</slf4j.version>
-        <scf.version>1.4.0</scf.version>
-        <scf-simple.version>1.4.2</scf-simple.version>
-        <scf-yaml.version>1.1.1</scf-yaml.version>
-        <scf-labeled.version>1.4.0</scf-labeled.version>
+        <scf-bom.version>1.4.1</scf-bom.version>
         <guava.version>19.0</guava.version>
         <junit.version>4.12</junit.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
@@ -79,23 +76,10 @@
             </dependency>
             <dependency>
                 <groupId>org.mydotey.scf</groupId>
-                <artifactId>scf-core</artifactId>
-                <version>${scf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mydotey.scf</groupId>
-                <artifactId>scf-simple</artifactId>
-                <version>${scf-simple.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mydotey.scf</groupId>
-                <artifactId>scf-yaml</artifactId>
-                <version>${scf-yaml.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mydotey.scf</groupId>
-                <artifactId>scf-labeled</artifactId>
-                <version>${scf-labeled.version}</version>
+                <artifactId>scf-bom</artifactId>
+                <version>${scf-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
