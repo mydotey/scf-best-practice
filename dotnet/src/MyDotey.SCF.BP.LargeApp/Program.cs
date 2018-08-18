@@ -6,7 +6,7 @@ namespace MyDotey.SCF.BP.LargeApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            LargeApp.DoMain(args);
         }
     }
 }

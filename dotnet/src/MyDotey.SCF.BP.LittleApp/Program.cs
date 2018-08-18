@@ -6,7 +6,11 @@ namespace MyDotey.SCF.BP.LittleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            RawManager.DoMain(args);
+
+            //OneSource.DoMain(args);
+
+            //TwoSource.DoMain(args);
         }
     }
 }

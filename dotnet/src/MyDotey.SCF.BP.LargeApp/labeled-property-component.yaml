@@ -1,0 +1,10 @@
+- key: request.timeout
+  app: 10000
+  dc: shanghai
+  value: 100
+- key: request.timeout
+  app: 10000
+  value: 1000
+- key: request.timeout
+  dc: shanghai
+  value: 10000

@@ -10,4 +10,8 @@
     <PackageReference Include="MyDotey.SCF.Simple" Version="1.4.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="app.properties" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+
 </Project>
