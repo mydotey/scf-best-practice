@@ -13,7 +13,6 @@ namespace MyDotey.SCF.BP.Component.Labeled
     public abstract class AbstractDcConfigurationSource
         : AbstractLabeledConfigurationSource<ConfigurationSourceConfig>
     {
-
         public AbstractDcConfigurationSource(ConfigurationSourceConfig config)
             : base(config)
         {

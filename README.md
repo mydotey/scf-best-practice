@@ -14,6 +14,8 @@ Best Practices / Examples for [SCF](https://github.com/mydotey/scf).
 
 - java: https://github.com/mydotey/scf-best-practice/tree/master/java
 
+- dotnet: https://github.com/mydotey/scf-best-practice/tree/master/dotnet
+
 ## Developers
 
 - Qiang Zhao <koqizhao@outlook.com>

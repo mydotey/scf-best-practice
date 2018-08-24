@@ -53,15 +53,12 @@ namespace MyDotey.SCF.BP.Component.Labeled
 
         /**
          * use the following methods to get your properties / property values
-         *      LabeledKey&lt;string&gt; labeledKey = toLabeledKey(key);
-         *      getProperties().getSomeProperty
-         *      getProperties().getSomePropertyValue
-         *      getProperties().getManager()
+         *      LabeledKey&lt;string&gt; labeledKey = ToLabeledKey(key);
+         *      Properties.GetSomeProperty
+         *      Properties.GetSomePropertyValue
+         *      Properties.Manager
          */
-        protected LabeledStringProperties GetProperties()
-        {
-            return _properties;
-        }
+        protected LabeledStringProperties Properties { get { return _properties; } }
 
         public void YourComponentApi()
         {

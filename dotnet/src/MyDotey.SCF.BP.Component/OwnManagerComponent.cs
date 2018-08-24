@@ -23,14 +23,11 @@ namespace MyDotey.SCF.BP.Component
 
         /**
          * use the following methods to get your properties / property values
-         *      getProperties().getSomeProperty
-         *      getProperties().getSomePropertyValue
-         *      getProperties().getManager()
+         *      Properties.GetSomeProperty
+         *      Properties.GetSomePropertyValue
+         *      Properties.Manager
          */
-        protected StringProperties GetProperties()
-        {
-            return _properties;
-        }
+        protected StringProperties Properties { get { return _properties; } }
 
         private void InitConfig()
         {
