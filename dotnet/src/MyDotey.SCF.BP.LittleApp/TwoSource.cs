@@ -21,7 +21,7 @@ namespace MyDotey.SCF.BP.LittleApp
         private static IProperty<string, int?> _sleepTime;
         private static IProperty<string, MyCustomType> _myCustomData;
 
-        private static void initConfig()
+        private static void InitConfig()
         {
             // create a non-dynamic K/V (string/string) configuration source
             PropertiesFileConfigurationSourceConfig sourceConfig = StringPropertySources
@@ -38,9 +38,9 @@ namespace MyDotey.SCF.BP.LittleApp
             IConfigurationManager manager = ConfigurationManagers.NewManager(managerConfig);
 
             // Add a log listener
-            manager.AddChangeListener(
-                    e => Console.WriteLine("\nproperty {0} changed, old value: {1}, new value: {2}, changeTime: {3}",
-                            e.Property, e.OldValue, e.NewValue, e.ChangeTime));
+            manager.OnChange += (o, e) =>
+                Console.WriteLine("\nproperty {0} changed, old value: {1}, new value: {2}, changeTime: {3}",
+                    e.Property, e.OldValue, e.NewValue, e.ChangeTime);
 
             // create a StringProperties facade tool
             _properties = new StringProperties(manager);
@@ -51,7 +51,7 @@ namespace MyDotey.SCF.BP.LittleApp
             // default to "unknown"
             _appName = _properties.GetStringProperty("app.name", "unknown");
             // Add change listener to app.name
-            _appName.AddChangeListener(e => Console.WriteLine("\napp.name changed, maybe we need do something"));
+            _appName.OnChange += (o, e) => Console.WriteLine("\napp.name changed, maybe we need do something");
 
             // default to empty list
             _userList = _properties.GetListProperty("user.list", new List<string>());
@@ -68,7 +68,7 @@ namespace MyDotey.SCF.BP.LittleApp
 
         public static void DoMain(string[] args)
         {
-            initConfig();
+            InitConfig();
 
             // show properties
             Console.WriteLine("app.id: " + _appId.Value);

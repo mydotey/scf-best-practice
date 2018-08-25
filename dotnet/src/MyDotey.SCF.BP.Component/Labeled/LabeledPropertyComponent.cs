@@ -40,7 +40,7 @@ namespace MyDotey.SCF.BP.Component.Labeled
             allLabels.Add(dcLabel);
             allLabels.Add(appLabel);
 
-            PropertyLabels alternative1 = LabeledConfigurationProperties.NewLabels(dcLabels, PropertyLabels.EMPTY);
+            PropertyLabels alternative1 = LabeledConfigurationProperties.NewLabels(dcLabels, PropertyLabels.Empty);
             PropertyLabels alternative2 = LabeledConfigurationProperties.NewLabels(appLabels, alternative1);
             _propertyLabels = LabeledConfigurationProperties.NewLabels(allLabels, alternative2);
         }
