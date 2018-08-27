@@ -68,7 +68,7 @@ namespace MyDotey.SCF.BP.LittleApp
             // custom type property
             PropertyConfig<string, MyCustomType> propertyConfig6 = ConfigurationProperties
                     .NewConfigBuilder<string, MyCustomType>().SetKey("my-custom-type-property")
-                    .AddValueConverter(MyCustomType.CONVERTER).Build();
+                    .AddValueConverter(MyCustomType.Converter).Build();
             _myCustomData = _manager.GetProperty(propertyConfig6);
         }
 

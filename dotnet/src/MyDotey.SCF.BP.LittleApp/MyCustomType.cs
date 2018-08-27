@@ -24,7 +24,7 @@ namespace MyDotey.SCF.BP.LittleApp
             }
         }
 
-        public static readonly StringConverter<MyCustomType> CONVERTER = new MyConverter();
+        public static readonly StringConverter<MyCustomType> Converter = new MyConverter();
 
         public string Name { get; private set; }
         public string Say { get; private set; }

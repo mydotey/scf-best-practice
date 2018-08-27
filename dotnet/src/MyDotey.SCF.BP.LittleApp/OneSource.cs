@@ -51,7 +51,7 @@ namespace MyDotey.SCF.BP.LittleApp
             _sleepTime = _properties.GetIntProperty("sleep.time", 1000, v => v < 0 ? null : v);
 
             // custom type property
-            _myCustomData = _properties.GetProperty("my-custom-type-property", MyCustomType.CONVERTER);
+            _myCustomData = _properties.GetProperty("my-custom-type-property", MyCustomType.Converter);
         }
 
         public static void DoMain(string[] args)
