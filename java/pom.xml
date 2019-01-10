@@ -43,7 +43,7 @@
         <java.version>1.8</java.version>
         <source.encoding>UTF-8</source.encoding>
         <slf4j.version>1.7.21</slf4j.version>
-        <scf-bom.version>1.5.3</scf-bom.version>
+        <scf-bom.version>1.5.4</scf-bom.version>
         <guava.version>19.0</guava.version>
         <junit.version>4.12</junit.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
