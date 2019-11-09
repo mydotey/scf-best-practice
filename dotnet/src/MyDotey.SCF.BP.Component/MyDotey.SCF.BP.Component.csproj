@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MyDotey.SCF.Bom" Version="1.5.2" />
+    <PackageReference Include="MyDotey.SCF.Bom" Version="1.6.0" />
   </ItemGroup>
 
 </Project>
